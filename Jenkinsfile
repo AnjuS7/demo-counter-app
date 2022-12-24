@@ -52,23 +52,25 @@ pipeline{
             
             steps{
                 
-               
+                script{
                     
                     withSonarQubeEnv('sonarqube') {
                         
                         sh 'mvn clean package sonar:sonar'
                     
                    }
+                }
                     
                 }
             }
             stage('Quality Gate Status'){
                 
                 steps{
-                    
+                    script{ 
                    timeout(time: 1, unit: 'HOURS') {
                 waitForQualityGate abortPipeline: true
               }
+                    }
                 }
             }
         }
