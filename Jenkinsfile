@@ -52,12 +52,12 @@ pipeline{
             
             steps{
                 
-                script{
+               
                     
                     withSonarQubeEnv('sonarqube') {
                         
                         sh 'mvn clean package sonar:sonar'
-                    }
+                    
                    }
                     
                 }
@@ -66,10 +66,9 @@ pipeline{
                 
                 steps{
                     
-                    script{
-                        
-                        waitForQualityGate abortPipeline: false, credentialsId: 'sonar_cred'
-                    }
+                   timeout(time: 1, unit: 'HOURS') {
+                waitForQualityGate abortPipeline: true
+              }
                 }
             }
         }
