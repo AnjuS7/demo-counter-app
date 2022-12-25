@@ -101,7 +101,30 @@ pipeline{
             }
             
         }
-        
+     stage('Pushing to ECR') {
+     steps{  
+         script {
+                sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin demo_repo.dkr.ecr.us-east-1.amazonaws.com'
+                sh 'docker push demo_repo.dkr.ecr.us-east-1.amazonaws.com/your_ecr_repo:latest'
+         }
+        }
+      }
+   
+         // Stopping Docker containers for cleaner Docker run
+     stage('stop previous containers') {
+         steps {
+            sh 'docker ps -f name=myContainer -q | xargs --no-run-if-empty docker container stop'
+            sh 'docker container ls -a -fname=myContainer -q | xargs -r docker container rm'
+         }
+       }
+      
+    stage('Docker Run') {
+     steps{
+         script {
+                sh 'docker run -d -p 8096:9090 --rm --name myContainer demo_repo.dkr.ecr.us-east-1.amazonaws.com/your_ecr_repo:latest'
+            }
+      }
+    }   
 }
    
 }
