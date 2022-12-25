@@ -94,7 +94,7 @@ pipeline{
         {
             steps{
                 script{
-                sh 'docker image build -t $JOB_NAME:v1.$BUILD_ID .'
+                sh 'docker image build -t 635584255987.dkr.ecr.us-east-1.amazonaws.com/demo_repo:v1.$BUILD_ID .'
                 sh 'docker image tag 635584255987.dkr.ecr.us-east-1.amazonaws.com/demo_repo:v1.$BUILD_ID 635584255987.dkr.ecr.us-east-1.amazonaws.com/demo_repo:v1.$BUILD_ID'
                 sh 'docker image tag 635584255987.dkr.ecr.us-east-1.amazonaws.com/demo_repo:v1.$BUILD_ID 635584255987.dkr.ecr.us-east-1.amazonaws.com/demo_repo:latest'    
                 }
