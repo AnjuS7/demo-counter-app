@@ -104,8 +104,8 @@ pipeline{
      stage('Pushing to ECR') {
      steps{  
          script {
-                sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 902079157234.dkr.ecr.us-east-1.amazonaws.com'
-                sh 'docker push 902079157234.dkr.ecr.us-east-1.amazonaws.com/demo_repo:latest'
+                sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 635584255987.dkr.ecr.us-east-1.amazonaws.com/demo_repo'
+                sh 'docker push 635584255987.dkr.ecr.us-east-1.amazonaws.com/demo_repo:latest'
          }
         }
       }
@@ -121,7 +121,7 @@ pipeline{
     stage('Docker Run') {
      steps{
          script {
-                sh 'docker run -d -p 8096:9090 --rm --name myContainer 902079157234.dkr.ecr.us-east-1.amazonaws.com/demo_repo:latest'
+                sh 'docker run -d -p 8096:9090 --rm --name myContainer 635584255987.dkr.ecr.us-east-1.amazonaws.com/demo_repo:latest'
             }
       }
     }   
