@@ -28,7 +28,7 @@ pipeline{
                 }
             }
         }
-        stage('Integration testing'){
+        stage('Integration Testing'){
             
             steps{
                 
